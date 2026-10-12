@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #040812;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(5, 10, 20, 0.95);
+            padding: 18px 60px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar .logo-container i {
+            color: #00d4ff;
+            filter: drop-shadow(0 0 10px #00d4ff);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #8a99ad;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00d4ff;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00d4ff;
+            box-shadow: 0 0 8px #00d4ff;
+            border-radius: 2px;
+        }
+
+        .user-auth a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0072ff 100%);
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .user-auth a:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+        }
+
+        /* Main Container */
+        .container {
+            padding: 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: #00d4ff;
+            font-size: 22px;
+        }
+
+        /* Anime Poster Cards Grid */
+        .poster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .poster-card {
+            border-radius: 14px;
+            overflow: hidden;
+            background: #0f172a;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .poster-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #00d4ff;
+            box-shadow: 0 12px 25px rgba(0, 212, 255, 0.25);
+        }
+
+        .poster-card img {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .poster-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .poster-title {
+            padding: 14px 10px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: rgba(16, 30, 52, 0.95);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .container { padding: 20px; }
+            .poster-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navbar -->
+    <div class="navbar">
+        <div class="logo-container">
+            <i class="fa-solid fa-dragon"></i>
+            AnimeWorld
+        </div>
+        
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}" class="active">Home</a>
+            <a href="#">Series</a>
+            <a href="#">Movies</a>
+            <a href="#">Anime</a>
+            <a href="#">Cartoons</a>
+        </div>
+
+        <div class="user-auth">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h2 class="section-title">
+            <i class="fa-solid fa-fire"></i>
+            Trending Shows
+        </h2>
+
+        <!-- Clickable Poster Cards Section -->
+        <div class="poster-grid">
+            <!-- Naruto Card -->
+            <a href="{{ url_for('naruto') }}" class="poster-card">
+                <img src="{{ url_for('static', filename='image/naruto.jpg') }}" alt="Naruto">
+                <div class="poster-title">Naruto</div>
+            </a>
+
+            <!-- Pokémon Card -->
+            <a href="{{ url_for('pokemon') }}" class="poster-card">
+                <img src="{{ url_for('static', filename='image/pokemon.jpg') }}" alt="Pokémon">
+                <div class="poster-title">Pokémon</div>
+            </a>
+
+            <!-- Solo Leveling Card -->
+            <a href="{{ url_for('solo_leveling') }}" class="poster-card">
+                <img src="{{ url_for('static', filename='image/sololeveling.jpg') }}" alt="Solo Leveling">
+                <div class="poster-title">Solo Leveling</div>
+            </a>
+            
+            <!-- Demon Slayer Card -->
+            <a href="{{ url_for('demon_slayer') }}" class="poster-card">
+                <img src="{{ url_for('static', filename='image/demonslayer.jpg') }}" alt="Demon Slayer">
+                <div class="poster-title">Demon Slayer</div>
+            </a>
+
+            <!-- Jujutsu Kaisen Card -->
+            <a href="{{ url_for('jujutsu_kaisen') }}" class="poster-card">
+                <img src="{{ url_for('static', filename='image/jujutsukaisen.jpg') }}" alt="Jujutsu Kaisen">
+                <div class="poster-title">Jujutsu Kaisen</div>
+            </a>
+            
+            <!-- Doraemon Card -->
+            <a href="{{ url_for('doraemon') }}" class="poster-card">
+                <img src="{{ url_for('static', filename='image/doraemon.jpg') }}" alt="Doraemon">
+                <div class="poster-title">Doraemon</div>
+            </a>
+
+            <!-- Shinchan Card -->
+            <a href="{{ url_for('shinchan') }}" class="poster-card">
+                <img src="{{ url_for('static', filename='image/Shinchan.jpg') }}" alt="Shinchan">
+                <div class="poster-title">Shinchan</div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

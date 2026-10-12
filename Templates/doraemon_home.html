@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doraemon Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .back-btn {
+            align-self: flex-start;
+            padding: 10px 20px;
+            background: #ff007f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #00ffcc;
+            color: #0f2027;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
+        }
+
+        .character-main-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 2px solid #00f2fe;
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 750px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+            text-align: center;
+        }
+
+        .home-title {
+            color: #ffea00;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .profile-content {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            text-align: left;
+            margin-bottom: 35px;
+        }
+
+        .photo-box {
+            width: 180px;
+            height: 180px;
+            flex-shrink: 0;
+            border-radius: 15px;
+            border: 3px solid #00ffcc;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .details-box h3 {
+            color: #00f2fe;
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+        }
+
+        .details-box p {
+            color: #e2e8f0;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .circles-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 20px;
+        }
+
+        .circle-btn-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .pink-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ff007f, #ff5252);
+            border: 3px solid #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pink-circle span {
+            font-size: 35px;
+        }
+
+        .circle-label {
+            margin-top: 12px;
+            font-weight: bold;
+            color: #ff007f;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(255, 0, 127, 0.3);
+        }
+
+        .circle-btn-item:hover .pink-circle {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.9);
+            border-color: #00ffcc;
+        }
+
+        .circle-btn-item:hover .circle-label {
+            color: #00ffcc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Main App Home -->
+    <a href="{{ url_for('home') }}" class="back-btn">⬅ Home</a>
+
+    <div class="character-main-card">
+        <h2 class="home-title">Doraemon Page</h2>
+        
+        <div class="profile-content">
+            <div class="photo-box">
+                <img src="{{ url_for('static', filename='image/doraemon.png') }}" alt="Doraemon">
+            </div>
+            <div class="details-box">
+                <h3>Doraemon</h3>
+                <p>A robotic cat from the 22nd century sent back in time to help Nobita Nobi. He has a 4D pocket on his belly from which he produces various futuristic gadgets to help solve daily problems.</p>
+            </div>
+        </div>
+
+        <div class="circles-container">
+            <a href="{{ url_for('doraemon_movies') }}" class="circle-btn-item">
+                <div class="pink-circle">
+                    <span>🎬</span>
+                </div>
+                <span class="circle-label">Movies</span>
+            </a>
+
+           
+
+            <a href="{{ url_for('doraemon_episodes') }}" class="circle-btn-item">
+                <div class="pink-circle">
+                    <span>📺</span>
+                </div>
+                <span class="circle-label">Episodes</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
